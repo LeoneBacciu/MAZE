@@ -1,0 +1,22 @@
+{
+  "loading": {
+    "directory": "/home/stark/PycharmProjects/MAZE/src/victims/data/color",
+    "class": "yellow",
+    "total_samples": 1500
+  },
+  "training": {
+    "model": {
+      "name": "letter",
+      "input": [300, 300],
+      "epochs": 1,
+      "b_size": 16,
+      "trained": true
+    },
+    "directory": "/home/stark/PycharmProjects/MAZE/src/victims/data",
+    "samples": [1000, 500]
+  },
+  "predicting": {
+    "model": "both",
+    "directory": "/home/stark/PycharmProjects/MAZE/src/victims/data/tmp"
+  }
+}
