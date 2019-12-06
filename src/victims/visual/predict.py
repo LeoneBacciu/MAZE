@@ -23,7 +23,7 @@ name = data['model']
 categoriesC = ["green", "red", "white", "yellow"]
 categoriesL = ['h', 'n', 's', 'u']
 
-cam = Camera(2)
+cam = Camera(0)
 
 pred_datagen = ImageDataGenerator(rescale=1. / 255)
 pred_gen = pred_datagen.flow_from_directory(

@@ -2,7 +2,7 @@ from utils.recorder import Camera
 import cv2
 from json import loads
 
-cam = Camera(2)
+cam = Camera(0)
 
 json = open('config.json', 'r').read()
 data = loads(json)
