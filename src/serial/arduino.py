@@ -1,16 +1,23 @@
 from serial import Serial
+from time import sleep
 
 
 class Arduino:
-    arduino = Serial('/dev/ttyACM0', 115200)
 
-    @staticmethod
-    def read():
-        try:
-            return float(Arduino.arduino.readline()[:-2])
-        except ValueError:
-            return 0.0
+    def __init__(self, port):
+        self.arduino = Serial(port, 115200)
+
+    def read(self):
+        while self.arduino.in_waiting > 0:
+            sleep(.1)
+        return self.arduino.readline().decode("utf-8")[:-2]
+
+    def write(self, s):
+        self.arduino.write(s)
+
+    def ping(self):
+        self.write(b'0')
+        print(self.read() == '48')
 
     def __del__(self):
-        Arduino.arduino.close()
-
+        self.arduino.close()

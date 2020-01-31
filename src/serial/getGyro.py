@@ -1,8 +1,12 @@
+import time
 from arduino import Arduino
 
-datap = 0.0
+
+arduino = Arduino('/dev/ttyUSB3')
 for _ in range(10000):
-    data = Arduino.read()
-    if data < datap-1.0 or data > datap+1.0:
-        print(data)
-        datap = data
+    while True:
+        arduino.write(b'1')
+        time.sleep(1)
+        arduino.write(b'0')
+        time.sleep(1)
+

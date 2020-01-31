@@ -37,7 +37,7 @@ class Matrix:
             unvisited = self.data[xc][yc].getUnvisited()
             if len(unvisited) > 0:
                 d.append((xc + unvisited[0][0], yc + unvisited[0][1]))
-                return unvisited[0][0], unvisited[0][1], d
+                return d
             for walls in self.data[xc][yc].getWalls():
                 d1, d2 = walls[0], walls[1]
                 if not places[d1][d2]:
@@ -46,6 +46,13 @@ class Matrix:
                     nd.append((d1, d2))
                     q.append(([walls[0]], [walls[1]], nd.copy()))
         raise EndMazeError("You explored all the MAZE!")
+
+    @staticmethod
+    def absToRel(coord: list):
+        out = []
+        for i in range(1, len(coord)):
+            out.append((coord[i][0]-coord[i-1][0], coord[i][1]-coord[i-1][1]))
+        return out
 
     def load(self, name: str):
         with open(name, 'r+') as rf:
@@ -67,9 +74,12 @@ matrix = Matrix((10, 10))
 matrix.load('map1.txt')
 x, y = 6, 4
 ts = time.time()
+route = None
 try:
-    print(matrix.BFS(x, y))
+    route = matrix.BFS(x, y)
 except EndMazeError:
     print('fine')
+print(route)
+print(matrix.absToRel(route))
 print(time.time()-ts)
 matrix.save('map2.txt')
